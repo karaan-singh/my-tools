@@ -4,7 +4,7 @@ export default function MediaPreview({ info }) {
   if (!info) return null;
 
   return (
-    <div className="glass-panel" style={{ padding: '24px', marginBottom: '24px' }}>
+    <div className="glass-panel" style={{ padding: '24px', marginBottom: '24px', background: '#ffffff' }}>
       <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
         {/* Thumbnail with duration badge */}
         <div style={{
@@ -12,11 +12,11 @@ export default function MediaPreview({ info }) {
           width: '320px',
           maxWidth: '100%',
           aspectRatio: '16/9',
-          borderRadius: '14px',
+          borderRadius: '12px',
           overflow: 'hidden',
-          backgroundColor: '#0f172a',
-          border: '1px solid rgba(244, 114, 182, 0.3)',
-          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.35)',
+          backgroundColor: '#f1f5f9',
+          border: '1px solid #e2e8f0',
+          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)',
           flexShrink: 0
         }}>
           {info.thumbnail ? (
@@ -43,13 +43,12 @@ export default function MediaPreview({ info }) {
               position: 'absolute',
               bottom: '10px',
               right: '10px',
-              background: 'rgba(11, 15, 25, 0.88)',
-              color: '#bae6fd', /* Light blue */
-              fontSize: '0.78rem',
+              background: 'rgba(15, 23, 42, 0.85)',
+              color: '#ffffff',
+              fontSize: '0.75rem',
               fontWeight: 700,
               padding: '3px 8px',
               borderRadius: '6px',
-              border: '1px solid rgba(56, 189, 248, 0.4)',
               letterSpacing: '0.04em'
             }}>
               {info.duration_formatted}
@@ -61,9 +60,9 @@ export default function MediaPreview({ info }) {
         <div style={{ flex: 1, minWidth: '260px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <div style={{ display: 'flex', gap: '8px', marginBottom: '10px', flexWrap: 'wrap' }}>
             <span style={{
-              background: 'rgba(244, 114, 182, 0.2)',
-              border: '1px solid rgba(244, 114, 182, 0.5)',
-              color: '#fbcfe8', /* Light pink */
+              background: '#fdf2f8',
+              border: '1px solid #fbcfe8',
+              color: '#9d174d',
               padding: '4px 12px',
               borderRadius: '12px',
               fontSize: '0.8rem',
@@ -73,9 +72,9 @@ export default function MediaPreview({ info }) {
             </span>
 
             <span style={{
-              background: 'rgba(56, 189, 248, 0.16)',
-              border: '1px solid rgba(56, 189, 248, 0.4)',
-              color: '#bae6fd', /* Light blue */
+              background: '#f0f9ff',
+              border: '1px solid #bae6fd',
+              color: '#0369a1',
               padding: '4px 12px',
               borderRadius: '12px',
               fontSize: '0.8rem',
@@ -86,9 +85,9 @@ export default function MediaPreview({ info }) {
           </div>
 
           <h2 style={{
-            fontSize: '1.35rem',
+            fontSize: '1.3rem',
             fontWeight: 700,
-            color: '#ffffff',
+            color: '#0f172a',
             lineHeight: '1.4',
             marginBottom: '10px',
             fontFamily: "'Space Grotesk', sans-serif"
@@ -98,7 +97,7 @@ export default function MediaPreview({ info }) {
 
           {info.description && (
             <p style={{
-              color: '#cbd5e1',
+              color: '#475569',
               fontSize: '0.88rem',
               lineHeight: '1.5',
               display: '-webkit-box',

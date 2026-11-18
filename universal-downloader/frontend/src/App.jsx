@@ -150,13 +150,13 @@ export default function App() {
       {/* Error Banner */}
       {errorMessage && (
         <div style={{
-          background: 'rgba(239, 68, 68, 0.15)',
-          border: '1px solid rgba(239, 68, 68, 0.4)',
-          color: '#fca5a5',
+          background: '#fef2f2',
+          border: '1px solid #fecaca',
+          color: '#dc2626',
           padding: '16px 20px',
-          borderRadius: '14px',
+          borderRadius: '12px',
           marginBottom: '24px',
-          fontSize: '0.95rem',
+          fontSize: '0.94rem',
           display: 'flex',
           alignItems: 'center',
           gap: '12px'
@@ -201,10 +201,10 @@ export default function App() {
       <footer style={{
         marginTop: '60px',
         textAlign: 'center',
-        color: '#94a3b8',
-        fontSize: '0.82rem',
+        color: '#64748b',
+        fontSize: '0.84rem',
         lineHeight: '1.6',
-        borderTop: '1px solid rgba(226, 232, 240, 0.1)',
+        borderTop: '1px solid #e2e8f0',
         paddingTop: '24px'
       }}>
         <p>⚡ Powered by <b>yt-dlp</b>, <b>FFmpeg</b>, <b>FastAPI</b>, <b>BeautifulSoup</b> &amp; <b>React</b>.</p>

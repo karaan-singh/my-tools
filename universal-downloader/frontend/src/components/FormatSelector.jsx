@@ -27,42 +27,42 @@ export default function FormatSelector({ info, onDownload, downloading }) {
   };
 
   return (
-    <div className="glass-panel" style={{ padding: '24px', marginBottom: '28px' }}>
+    <div className="glass-panel" style={{ padding: '26px 30px', marginBottom: '28px', background: '#ffffff' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
         <h3 style={{
           fontSize: '1.25rem',
           fontWeight: 700,
-          color: '#ffffff',
+          color: '#0f172a',
           fontFamily: "'Space Grotesk', sans-serif"
         }}>
           Select Download Quality
         </h3>
 
-        {/* Tab Toggle with Light Pink & Light Blue */}
+        {/* Tab Toggle */}
         <div style={{
           display: 'flex',
-          background: 'rgba(15, 23, 42, 0.85)',
+          background: '#f1f5f9',
           padding: '4px',
-          borderRadius: '14px',
-          border: '1px solid rgba(226, 232, 240, 0.15)',
+          borderRadius: '12px',
+          border: '1px solid #e2e8f0',
           gap: '4px'
         }}>
           <button
             onClick={() => { setTab('video'); setSelectedFormat(videoOptions[0]); }}
             style={{
-              background: tab === 'video' ? 'linear-gradient(135deg, #f472b6, #ec4899)' : 'transparent',
-              color: tab === 'video' ? '#ffffff' : '#cbd5e1',
-              border: 'none',
-              padding: '9px 22px',
-              borderRadius: '10px',
+              background: tab === 'video' ? '#ffffff' : 'transparent',
+              color: tab === 'video' ? '#be185d' : '#64748b',
+              border: tab === 'video' ? '1px solid #fbcfe8' : 'none',
+              padding: '8px 20px',
+              borderRadius: '8px',
               fontWeight: 700,
-              fontSize: '0.9rem',
+              fontSize: '0.88rem',
               cursor: 'pointer',
-              transition: 'all 0.25s ease',
+              transition: 'all 0.2s ease',
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              boxShadow: tab === 'video' ? '0 4px 15px rgba(244, 114, 182, 0.4)' : 'none'
+              boxShadow: tab === 'video' ? '0 2px 6px rgba(0, 0, 0, 0.05)' : 'none'
             }}
           >
             <span>🎬</span>
@@ -72,19 +72,19 @@ export default function FormatSelector({ info, onDownload, downloading }) {
           <button
             onClick={() => { setTab('audio'); setSelectedFormat(audioOptions[0]); }}
             style={{
-              background: tab === 'audio' ? 'linear-gradient(135deg, #38bdf8, #0ea5e9)' : 'transparent',
-              color: tab === 'audio' ? '#ffffff' : '#cbd5e1',
-              border: 'none',
-              padding: '9px 22px',
-              borderRadius: '10px',
+              background: tab === 'audio' ? '#ffffff' : 'transparent',
+              color: tab === 'audio' ? '#0369a1' : '#64748b',
+              border: tab === 'audio' ? '1px solid #bae6fd' : 'none',
+              padding: '8px 20px',
+              borderRadius: '8px',
               fontWeight: 700,
-              fontSize: '0.9rem',
+              fontSize: '0.88rem',
               cursor: 'pointer',
-              transition: 'all 0.25s ease',
+              transition: 'all 0.2s ease',
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              boxShadow: tab === 'audio' ? '0 4px 15px rgba(56, 189, 248, 0.4)' : 'none'
+              boxShadow: tab === 'audio' ? '0 2px 6px rgba(0, 0, 0, 0.05)' : 'none'
             }}
           >
             <span>🎵</span>
@@ -102,46 +102,54 @@ export default function FormatSelector({ info, onDownload, downloading }) {
       }}>
         {activeOptions.map((opt, idx) => {
           const isSelected = currentSelection === opt;
-          const activeBorder = tab === 'video' ? '#f472b6' : '#38bdf8';
-          const activeBg = tab === 'video' ? 'rgba(244, 114, 182, 0.12)' : 'rgba(56, 189, 248, 0.12)';
-          const activeGlow = tab === 'video' ? '0 0 20px rgba(244, 114, 182, 0.35)' : '0 0 20px rgba(56, 189, 248, 0.35)';
+          const isVideo = tab === 'video';
+
+          const cardBg = isSelected 
+            ? (isVideo ? '#fdf2f8' : '#f0f9ff') 
+            : '#f8fafc';
+          const cardBorder = isSelected 
+            ? (isVideo ? '2px solid #ec4899' : '2px solid #0ea5e9') 
+            : '1px solid #e2e8f0';
+          const titleColor = isSelected 
+            ? (isVideo ? '#be185d' : '#0369a1') 
+            : '#0f172a';
 
           return (
             <div
               key={idx}
               onClick={() => setSelectedFormat(opt)}
               style={{
-                background: isSelected ? activeBg : 'rgba(15, 23, 42, 0.65)',
-                border: isSelected ? `2px solid ${activeBorder}` : '1px solid rgba(226, 232, 240, 0.12)',
-                borderRadius: '14px',
-                padding: '18px',
+                background: cardBg,
+                border: cardBorder,
+                borderRadius: '12px',
+                padding: '16px',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
                 position: 'relative',
-                boxShadow: isSelected ? activeGlow : 'none'
+                boxShadow: isSelected ? '0 4px 12px rgba(15, 23, 42, 0.06)' : 'none'
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
                 <div>
                   <span style={{
-                    fontSize: '1.15rem',
+                    fontSize: '1.1rem',
                     fontWeight: 700,
-                    color: isSelected ? (tab === 'video' ? '#fbcfe8' : '#bae6fd') : '#ffffff',
+                    color: titleColor,
                     fontFamily: "'Space Grotesk', sans-serif"
                   }}>
                     {opt.quality_tag}
                   </span>
                   {opt.resolution && (
-                    <span style={{ color: '#cbd5e1', fontSize: '0.85rem', marginLeft: '6px' }}>
+                    <span style={{ color: '#64748b', fontSize: '0.85rem', marginLeft: '6px' }}>
                       ({opt.resolution})
                     </span>
                   )}
                 </div>
 
                 <span style={{
-                  background: 'rgba(226, 232, 240, 0.12)',
-                  color: '#f8fafc',
-                  border: '1px solid rgba(226, 232, 240, 0.25)',
+                  background: '#ffffff',
+                  color: '#475569',
+                  border: '1px solid #cbd5e1',
                   fontSize: '0.72rem',
                   padding: '2px 8px',
                   borderRadius: '6px',
@@ -152,7 +160,7 @@ export default function FormatSelector({ info, onDownload, downloading }) {
                 </span>
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.84rem', color: '#cbd5e1' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.84rem', color: '#64748b' }}>
                 <span>{opt.filesize_formatted || 'High Bitrate'}</span>
                 {opt.fps && <span>{opt.fps} FPS</span>}
                 {opt.title && <span>{opt.title}</span>}
@@ -163,7 +171,7 @@ export default function FormatSelector({ info, onDownload, downloading }) {
                   position: 'absolute',
                   top: '-8px',
                   right: '-8px',
-                  background: tab === 'video' ? '#f472b6' : '#38bdf8',
+                  background: isVideo ? '#ec4899' : '#0ea5e9',
                   color: '#ffffff',
                   width: '22px',
                   height: '22px',
@@ -173,7 +181,7 @@ export default function FormatSelector({ info, onDownload, downloading }) {
                   justifyContent: 'center',
                   fontSize: '12px',
                   fontWeight: 800,
-                  boxShadow: '0 2px 6px rgba(0,0,0,0.4)'
+                  boxShadow: '0 2px 6px rgba(0,0,0,0.15)'
                 }}>
                   ✓
                 </div>
@@ -190,9 +198,9 @@ export default function FormatSelector({ info, onDownload, downloading }) {
         className="glow-btn"
         style={{
           width: '100%',
-          padding: '16px',
-          borderRadius: '14px',
-          fontSize: '1.1rem',
+          padding: '15px',
+          borderRadius: '12px',
+          fontSize: '1.05rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',

@@ -6,32 +6,32 @@ export default function WebsiteScannerResults({ scanData, onSelectVideo }) {
   const { page_title, page_url, total_found, videos } = scanData;
 
   return (
-    <div className="glass-panel" style={{ padding: '28px', marginBottom: '32px' }}>
+    <div className="glass-panel" style={{ padding: '26px 30px', marginBottom: '32px', background: '#ffffff' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '14px', marginBottom: '20px' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
             <span style={{ fontSize: '20px' }}>🌐</span>
             <h3 style={{
-              fontSize: '1.3rem',
+              fontSize: '1.25rem',
               fontWeight: 700,
-              color: '#ffffff',
+              color: '#0f172a',
               fontFamily: "'Space Grotesk', sans-serif"
             }}>
               Website Scan Results
             </h3>
           </div>
-          <div style={{ fontSize: '0.85rem', color: '#cbd5e1' }}>
-            Page: <span style={{ color: '#fbcfe8', fontWeight: 600 }}>{page_title || page_url}</span>
+          <div style={{ fontSize: '0.85rem', color: '#64748b' }}>
+            Page: <span style={{ color: '#be185d', fontWeight: 600 }}>{page_title || page_url}</span>
           </div>
         </div>
 
         <span style={{
-          background: 'rgba(56, 189, 248, 0.16)',
-          border: '1px solid rgba(56, 189, 248, 0.45)',
-          color: '#bae6fd',
+          background: '#f0f9ff',
+          border: '1px solid #bae6fd',
+          color: '#0369a1',
           padding: '6px 16px',
           borderRadius: '20px',
-          fontSize: '0.88rem',
+          fontSize: '0.86rem',
           fontWeight: 700
         }}>
           ✨ {total_found} {total_found === 1 ? 'Video' : 'Videos'} Found
@@ -40,15 +40,15 @@ export default function WebsiteScannerResults({ scanData, onSelectVideo }) {
 
       {total_found === 0 ? (
         <div style={{
-          background: 'rgba(15, 23, 42, 0.7)',
-          border: '1px dashed rgba(226, 232, 240, 0.2)',
-          borderRadius: '14px',
+          background: '#f8fafc',
+          border: '1px dashed #cbd5e1',
+          borderRadius: '12px',
           padding: '30px',
           textAlign: 'center',
-          color: '#cbd5e1'
+          color: '#475569'
         }}>
-          <p style={{ fontSize: '1.05rem', fontWeight: 600 }}>No downloadable videos detected on this web page.</p>
-          <p style={{ fontSize: '0.85rem', color: '#94a3b8', marginTop: '6px' }}>
+          <p style={{ fontSize: '1rem', fontWeight: 600, color: '#0f172a' }}>No downloadable videos detected on this web page.</p>
+          <p style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '6px' }}>
             The page might use dynamic DRM encryption or require user login to render media.
           </p>
         </div>
@@ -62,14 +62,14 @@ export default function WebsiteScannerResults({ scanData, onSelectVideo }) {
             <div
               key={vid.id || idx}
               style={{
-                background: 'rgba(15, 23, 42, 0.75)',
-                border: '1px solid rgba(244, 114, 182, 0.25)',
-                borderRadius: '16px',
+                background: '#ffffff',
+                border: '1px solid #e2e8f0',
+                borderRadius: '14px',
                 overflow: 'hidden',
                 display: 'flex',
                 flexDirection: 'column',
-                transition: 'all 0.25s ease',
-                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.3)'
+                transition: 'all 0.2s ease',
+                boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)'
               }}
             >
               {/* Thumbnail / Placeholder */}
@@ -77,7 +77,7 @@ export default function WebsiteScannerResults({ scanData, onSelectVideo }) {
                 position: 'relative',
                 width: '100%',
                 aspectRatio: '16/9',
-                background: '#090d16',
+                background: '#f1f5f9',
                 overflow: 'hidden'
               }}>
                 {vid.thumbnail ? (
@@ -94,11 +94,11 @@ export default function WebsiteScannerResults({ scanData, onSelectVideo }) {
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#bae6fd',
+                    color: '#0369a1',
                     gap: '6px'
                   }}>
                     <span style={{ fontSize: '28px' }}>🎬</span>
-                    <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>{vid.platform}</span>
+                    <span style={{ fontSize: '0.75rem', color: '#64748b' }}>{vid.platform}</span>
                   </div>
                 )}
 
@@ -107,13 +107,12 @@ export default function WebsiteScannerResults({ scanData, onSelectVideo }) {
                     position: 'absolute',
                     bottom: '8px',
                     right: '8px',
-                    background: 'rgba(11, 15, 25, 0.88)',
-                    color: '#bae6fd',
+                    background: 'rgba(15, 23, 42, 0.85)',
+                    color: '#ffffff',
                     fontSize: '0.75rem',
                     fontWeight: 700,
                     padding: '2px 8px',
-                    borderRadius: '6px',
-                    border: '1px solid rgba(56, 189, 248, 0.3)'
+                    borderRadius: '6px'
                   }}>
                     {vid.duration_formatted}
                   </span>
@@ -123,13 +122,13 @@ export default function WebsiteScannerResults({ scanData, onSelectVideo }) {
                   position: 'absolute',
                   top: '8px',
                   left: '8px',
-                  background: 'rgba(244, 114, 182, 0.9)',
-                  color: '#0f172a',
+                  background: '#fdf2f8',
+                  border: '1px solid #fbcfe8',
+                  color: '#9d174d',
                   fontSize: '0.72rem',
                   fontWeight: 800,
                   padding: '2px 8px',
-                  borderRadius: '6px',
-                  letterSpacing: '0.02em'
+                  borderRadius: '6px'
                 }}>
                   #{idx + 1}
                 </span>
@@ -139,22 +138,22 @@ export default function WebsiteScannerResults({ scanData, onSelectVideo }) {
               <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', flex: 1 }}>
                 <div style={{ display: 'flex', gap: '6px', marginBottom: '8px', flexWrap: 'wrap' }}>
                   <span style={{
-                    background: 'rgba(56, 189, 248, 0.15)',
-                    border: '1px solid rgba(56, 189, 248, 0.35)',
-                    color: '#bae6fd',
+                    background: '#f0f9ff',
+                    border: '1px solid #bae6fd',
+                    color: '#0369a1',
                     padding: '2px 8px',
-                    borderRadius: '8px',
+                    borderRadius: '6px',
                     fontSize: '0.72rem',
                     fontWeight: 700
                   }}>
                     {vid.platform}
                   </span>
                   <span style={{
-                    background: 'rgba(244, 114, 182, 0.12)',
-                    border: '1px solid rgba(244, 114, 182, 0.3)',
-                    color: '#fbcfe8',
+                    background: '#fdf2f8',
+                    border: '1px solid #fbcfe8',
+                    color: '#9d174d',
                     padding: '2px 8px',
-                    borderRadius: '8px',
+                    borderRadius: '6px',
                     fontSize: '0.72rem',
                     fontWeight: 600
                   }}>
@@ -164,9 +163,9 @@ export default function WebsiteScannerResults({ scanData, onSelectVideo }) {
 
                 <div style={{
                   fontWeight: 700,
-                  fontSize: '0.96rem',
-                  color: '#ffffff',
-                  lineHeight: '1.35',
+                  fontSize: '0.94rem',
+                  color: '#0f172a',
+                  lineHeight: '1.4',
                   marginBottom: '12px',
                   display: '-webkit-box',
                   WebkitLineClamp: 2,
@@ -184,8 +183,8 @@ export default function WebsiteScannerResults({ scanData, onSelectVideo }) {
                     style={{
                       flex: 1,
                       padding: '10px 14px',
-                      borderRadius: '10px',
-                      fontSize: '0.88rem',
+                      borderRadius: '8px',
+                      fontSize: '0.86rem',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -202,11 +201,11 @@ export default function WebsiteScannerResults({ scanData, onSelectVideo }) {
                     rel="noopener noreferrer"
                     title="Open Source Link"
                     style={{
-                      background: 'rgba(226, 232, 240, 0.1)',
-                      border: '1px solid rgba(226, 232, 240, 0.25)',
-                      color: '#cbd5e1',
+                      background: '#f8fafc',
+                      border: '1px solid #e2e8f0',
+                      color: '#475569',
                       padding: '10px 14px',
-                      borderRadius: '10px',
+                      borderRadius: '8px',
                       textDecoration: 'none',
                       display: 'flex',
                       alignItems: 'center',

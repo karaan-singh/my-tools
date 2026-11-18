@@ -43,33 +43,33 @@ export default function UrlInput({
   };
 
   return (
-    <div className="glass-panel" style={{ padding: '24px 28px', marginBottom: '28px' }}>
+    <div className="glass-panel" style={{ padding: '26px 30px', marginBottom: '28px', background: '#ffffff' }}>
       {/* Mode Switcher Tabs */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '10px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px', flexWrap: 'wrap', gap: '10px' }}>
         <div style={{
           display: 'flex',
-          background: 'rgba(15, 23, 42, 0.85)',
+          background: '#f1f5f9',
           padding: '4px',
           borderRadius: '12px',
-          border: '1px solid rgba(226, 232, 240, 0.15)',
+          border: '1px solid #e2e8f0',
           gap: '4px'
         }}>
           <button
             onClick={() => setMode('inspect')}
             style={{
-              background: mode === 'inspect' ? 'linear-gradient(135deg, #f472b6, #ec4899)' : 'transparent',
-              color: mode === 'inspect' ? '#ffffff' : '#cbd5e1',
-              border: 'none',
+              background: mode === 'inspect' ? '#ffffff' : 'transparent',
+              color: mode === 'inspect' ? '#be185d' : '#64748b',
+              border: mode === 'inspect' ? '1px solid #fbcfe8' : 'none',
               padding: '8px 18px',
               borderRadius: '8px',
               fontWeight: 700,
-              fontSize: '0.85rem',
+              fontSize: '0.86rem',
               cursor: 'pointer',
               transition: 'all 0.2s ease',
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              boxShadow: mode === 'inspect' ? '0 4px 14px rgba(244, 114, 182, 0.4)' : 'none'
+              boxShadow: mode === 'inspect' ? '0 2px 6px rgba(0, 0, 0, 0.05)' : 'none'
             }}
           >
             <span>🎬</span>
@@ -79,39 +79,39 @@ export default function UrlInput({
           <button
             onClick={() => setMode('scan')}
             style={{
-              background: mode === 'scan' ? 'linear-gradient(135deg, #38bdf8, #0ea5e9)' : 'transparent',
-              color: mode === 'scan' ? '#ffffff' : '#cbd5e1',
-              border: 'none',
+              background: mode === 'scan' ? '#ffffff' : 'transparent',
+              color: mode === 'scan' ? '#0369a1' : '#64748b',
+              border: mode === 'scan' ? '1px solid #bae6fd' : 'none',
               padding: '8px 18px',
               borderRadius: '8px',
               fontWeight: 700,
-              fontSize: '0.85rem',
+              fontSize: '0.86rem',
               cursor: 'pointer',
               transition: 'all 0.2s ease',
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              boxShadow: mode === 'scan' ? '0 4px 14px rgba(56, 189, 248, 0.4)' : 'none'
+              boxShadow: mode === 'scan' ? '0 2px 6px rgba(0, 0, 0, 0.05)' : 'none'
             }}
           >
             <span>🌐</span>
-            <span>Website Video Scanner (Find All Videos)</span>
+            <span>Website Video Scanner</span>
           </button>
         </div>
 
-        <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>
+        <span style={{ fontSize: '0.82rem', color: '#64748b' }}>
           {mode === 'scan' 
-            ? 'Detects HTML5 videos, embedded players, & direct files on any page'
-            : 'Inspects specific video & audio streams'}
+            ? 'Crawl any website for HTML5 videos, iframe embeds & direct files'
+            : 'Inspect specific video & audio quality options'}
         </span>
       </div>
 
       <label style={{
         display: 'block',
-        fontSize: '0.88rem',
+        fontSize: '0.86rem',
         textTransform: 'uppercase',
-        letterSpacing: '0.08em',
-        color: mode === 'scan' ? '#bae6fd' : '#fbcfe8',
+        letterSpacing: '0.06em',
+        color: mode === 'scan' ? '#0369a1' : '#be185d',
         fontWeight: 700,
         marginBottom: '10px'
       }}>
@@ -123,17 +123,15 @@ export default function UrlInput({
       <div style={{
         display: 'flex',
         alignItems: 'center',
-        background: 'rgba(15, 23, 42, 0.88)',
-        border: mode === 'scan' ? '1px solid rgba(56, 189, 248, 0.45)' : '1px solid rgba(244, 114, 182, 0.45)',
-        borderRadius: '16px',
-        padding: '6px 8px 6px 18px',
+        background: '#ffffff',
+        border: mode === 'scan' ? '1.5px solid #7dd3fc' : '1.5px solid #f472b6',
+        borderRadius: '14px',
+        padding: '5px 8px 5px 16px',
         gap: '10px',
-        boxShadow: mode === 'scan' 
-          ? 'inset 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 15px rgba(56, 189, 248, 0.15)'
-          : 'inset 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 15px rgba(244, 114, 182, 0.15)',
-        transition: 'all 0.25s ease'
+        boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)',
+        transition: 'all 0.2s ease'
       }}>
-        <span style={{ fontSize: '18px', color: mode === 'scan' ? '#38bdf8' : '#f472b6' }}>
+        <span style={{ fontSize: '18px', color: mode === 'scan' ? '#0ea5e9' : '#ec4899' }}>
           {mode === 'scan' ? '🌐' : '🔗'}
         </span>
         <input
@@ -142,7 +140,7 @@ export default function UrlInput({
           onChange={(e) => setUrl(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={mode === 'scan'
-            ? "https://example.com/article, blog post, or page containing videos..."
+            ? "https://example.com/article, blog post, or webpage..."
             : "https://www.youtube.com/watch?v=... or TikTok, Twitter, Vimeo URL"
           }
           disabled={loading}
@@ -151,8 +149,8 @@ export default function UrlInput({
             background: 'transparent',
             border: 'none',
             outline: 'none',
-            color: '#f8fafc',
-            fontSize: '1.02rem',
+            color: '#0f172a',
+            fontSize: '1rem',
             fontFamily: 'inherit'
           }}
         />
@@ -180,12 +178,12 @@ export default function UrlInput({
           disabled={loading}
           type="button"
           style={{
-            background: 'rgba(226, 232, 240, 0.1)',
-            border: '1px solid rgba(226, 232, 240, 0.25)',
-            color: '#cbd5e1',
+            background: '#f8fafc',
+            border: '1px solid #e2e8f0',
+            color: '#334155',
             borderRadius: '10px',
             padding: '10px 16px',
-            fontSize: '0.88rem',
+            fontSize: '0.86rem',
             fontWeight: 600,
             cursor: 'pointer',
             transition: 'all 0.2s ease',
@@ -201,14 +199,14 @@ export default function UrlInput({
             disabled={loading || !url.trim()}
             className="glow-btn"
             style={{
-              borderRadius: '12px',
-              padding: '12px 26px',
-              fontSize: '0.98rem',
+              borderRadius: '10px',
+              padding: '11px 24px',
+              fontSize: '0.94rem',
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
               whiteSpace: 'nowrap',
-              background: 'linear-gradient(135deg, #38bdf8 0%, #a78bfa 50%, #f472b6 100%)'
+              background: 'linear-gradient(135deg, #38bdf8 0%, #ec4899 100%)'
             }}
           >
             {loading && loadingAction === 'scan' ? (
@@ -217,7 +215,7 @@ export default function UrlInput({
                   display: 'inline-block',
                   width: '14px',
                   height: '14px',
-                  border: '2px solid #0f172a',
+                  border: '2px solid #ffffff',
                   borderTopColor: 'transparent',
                   borderRadius: '50%',
                   animation: 'spin 0.8s linear infinite'
@@ -237,9 +235,9 @@ export default function UrlInput({
             disabled={loading || !url.trim()}
             className="glow-btn"
             style={{
-              borderRadius: '12px',
-              padding: '12px 26px',
-              fontSize: '0.98rem',
+              borderRadius: '10px',
+              padding: '11px 24px',
+              fontSize: '0.94rem',
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
@@ -252,7 +250,7 @@ export default function UrlInput({
                   display: 'inline-block',
                   width: '14px',
                   height: '14px',
-                  border: '2px solid #0f172a',
+                  border: '2px solid #ffffff',
                   borderTopColor: 'transparent',
                   borderRadius: '50%',
                   animation: 'spin 0.8s linear infinite'
@@ -271,19 +269,20 @@ export default function UrlInput({
 
       {/* Platform Chips */}
       <div style={{ marginTop: '16px', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-        <span style={{ fontSize: '0.8rem', color: '#94a3b8', marginRight: '4px' }}>Works on:</span>
+        <span style={{ fontSize: '0.8rem', color: '#64748b', marginRight: '4px' }}>Works on:</span>
         {POPULAR_PLATFORMS.map((p, idx) => {
           const isPink = idx % 2 === 0;
           return (
             <span
               key={p.name}
               style={{
-                background: isPink ? 'rgba(244, 114, 182, 0.12)' : 'rgba(56, 189, 248, 0.12)',
-                border: isPink ? '1px solid rgba(244, 114, 182, 0.3)' : '1px solid rgba(56, 189, 248, 0.3)',
-                color: isPink ? '#fbcfe8' : '#bae6fd',
+                background: isPink ? '#fdf2f8' : '#f0f9ff',
+                border: isPink ? '1px solid #fbcfe8' : '1px solid #bae6fd',
+                color: isPink ? '#9d174d' : '#0369a1',
                 padding: '4px 10px',
                 borderRadius: '12px',
                 fontSize: '0.75rem',
+                fontWeight: 600,
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '4px'
