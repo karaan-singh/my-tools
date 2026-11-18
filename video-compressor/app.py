@@ -1,7 +1,14 @@
 import os
+import sys
 import time
 import shutil
 from datetime import datetime
+
+# Ensure local modules can be found regardless of current working directory
+APP_DIR = os.path.dirname(os.path.abspath(__file__))
+if APP_DIR not in sys.path:
+    sys.path.insert(0, APP_DIR)
+
 import streamlit as st
 import compressor
 
