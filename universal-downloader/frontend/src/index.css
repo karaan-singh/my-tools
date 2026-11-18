@@ -1,20 +1,33 @@
 :root {
-  --bg-deep-aubergine-dark: #0e0314;
-  --bg-deep-aubergine-mid: #1a0624;
-  --bg-deep-aubergine-light: #2d0b38;
-  --card-bg: rgba(42, 13, 56, 0.72);
-  --card-border: rgba(226, 232, 240, 0.16);
-  --card-border-hover: rgba(245, 158, 11, 0.45);
-  
-  --ice-silver-primary: #ffffff;
-  --ice-silver-light: #f8fafc;
-  --ice-silver-mid: #cbd5e1;
-  --ice-silver-muted: #94a3b8;
+  --bg-dark: #0b0f19;
+  --bg-surface: #111827;
+  --card-bg: rgba(17, 24, 39, 0.75);
+  --card-border: rgba(226, 232, 240, 0.15);
+  --card-border-hover: rgba(244, 114, 182, 0.5);
 
-  --marigold-glow: #fde68a;
-  --marigold-light: #fbbf24;
-  --marigold-primary: #f59e0b;
-  --marigold-dark: #d97706;
+  /* Light Pink Shades */
+  --pink-lightest: #fdf2f8;
+  --pink-light: #fbcfe8;
+  --pink-primary: #f472b6;
+  --pink-glow: #f9a8d4;
+  --pink-dark: #db2777;
+  --pink-badge-bg: rgba(244, 114, 182, 0.18);
+  --pink-badge-border: rgba(244, 114, 182, 0.45);
+
+  /* Light Blue Shades */
+  --blue-lightest: #f0f9ff;
+  --blue-light: #bae6fd;
+  --blue-primary: #38bdf8;
+  --blue-glow: #7dd3fc;
+  --blue-dark: #0284c7;
+  --blue-badge-bg: rgba(56, 189, 248, 0.18);
+  --blue-badge-border: rgba(56, 189, 248, 0.45);
+
+  /* Text Colors */
+  --text-white: #ffffff;
+  --text-ice: #f8fafc;
+  --text-subtle: #cbd5e1;
+  --text-muted: #94a3b8;
 }
 
 * {
@@ -25,9 +38,13 @@
 
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  background: radial-gradient(ellipse at 20% 15%, var(--bg-deep-aubergine-light) 0%, var(--bg-deep-aubergine-mid) 50%, var(--bg-deep-aubergine-dark) 100%);
+  background: 
+    radial-gradient(ellipse at 15% 15%, rgba(244, 114, 182, 0.18) 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 20%, rgba(56, 189, 248, 0.18) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 85%, rgba(249, 168, 212, 0.12) 0%, transparent 50%),
+    #0b0f19;
   min-height: 100vh;
-  color: var(--ice-silver-light);
+  color: var(--text-ice);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
@@ -37,13 +54,14 @@ body {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 18px;
-  backdrop-filter: blur(14px);
-  box-shadow: 0 12px 36px rgba(10, 2, 15, 0.5);
-  transition: all 0.25s ease;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-panel:hover {
   border-color: var(--card-border-hover);
+  box-shadow: 0 14px 40px rgba(244, 114, 182, 0.15);
 }
 
 /* Custom Scrollbar */
@@ -51,41 +69,33 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #14041e;
+  background: #0f172a;
 }
 ::-webkit-scrollbar-thumb {
-  background: #3c124e;
+  background: linear-gradient(180deg, var(--pink-primary), var(--blue-primary));
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--marigold-primary);
+  background: var(--pink-light);
 }
 
-/* Animations */
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 35px rgba(251, 191, 36, 0.55);
-  }
-}
-
+/* Dual Light Pink & Light Blue Gradient CTA Button */
 .glow-btn {
-  background: linear-gradient(135deg, var(--marigold-light) 0%, var(--marigold-primary) 50%, var(--marigold-dark) 100%);
-  color: #120317;
+  background: linear-gradient(135deg, #f472b6 0%, #c084fc 50%, #38bdf8 100%);
+  color: #0f172a;
   font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
+  font-weight: 800;
   border: none;
   cursor: pointer;
   transition: all 0.25s ease;
-  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+  box-shadow: 0 6px 22px rgba(244, 114, 182, 0.35), 0 2px 10px rgba(56, 189, 248, 0.25);
+  letter-spacing: 0.01em;
 }
 
 .glow-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(245, 158, 11, 0.6);
-  background: linear-gradient(135deg, var(--marigold-glow) 0%, var(--marigold-light) 50%, var(--marigold-primary) 100%);
+  box-shadow: 0 8px 30px rgba(244, 114, 182, 0.55), 0 4px 15px rgba(56, 189, 248, 0.4);
+  background: linear-gradient(135deg, #fbcfe8 0%, #d8b4fe 50%, #7dd3fc 100%);
 }
 
 .glow-btn:disabled {

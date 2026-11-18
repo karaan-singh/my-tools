@@ -14,8 +14,9 @@ export default function MediaPreview({ info }) {
           aspectRatio: '16/9',
           borderRadius: '14px',
           overflow: 'hidden',
-          backgroundColor: '#1b0726',
-          border: '1px solid rgba(226, 232, 240, 0.2)',
+          backgroundColor: '#0f172a',
+          border: '1px solid rgba(244, 114, 182, 0.3)',
+          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.35)',
           flexShrink: 0
         }}>
           {info.thumbnail ? (
@@ -42,13 +43,13 @@ export default function MediaPreview({ info }) {
               position: 'absolute',
               bottom: '10px',
               right: '10px',
-              background: 'rgba(14, 3, 20, 0.88)',
-              color: '#f8fafc',
+              background: 'rgba(11, 15, 25, 0.88)',
+              color: '#bae6fd', /* Light blue */
               fontSize: '0.78rem',
               fontWeight: 700,
               padding: '3px 8px',
               borderRadius: '6px',
-              border: '1px solid rgba(226, 232, 240, 0.25)',
+              border: '1px solid rgba(56, 189, 248, 0.4)',
               letterSpacing: '0.04em'
             }}>
               {info.duration_formatted}
@@ -60,9 +61,9 @@ export default function MediaPreview({ info }) {
         <div style={{ flex: 1, minWidth: '260px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <div style={{ display: 'flex', gap: '8px', marginBottom: '10px', flexWrap: 'wrap' }}>
             <span style={{
-              background: 'rgba(245, 158, 11, 0.2)',
-              border: '1px solid rgba(245, 158, 11, 0.5)',
-              color: '#fbbf24',
+              background: 'rgba(244, 114, 182, 0.2)',
+              border: '1px solid rgba(244, 114, 182, 0.5)',
+              color: '#fbcfe8', /* Light pink */
               padding: '4px 12px',
               borderRadius: '12px',
               fontSize: '0.8rem',
@@ -72,9 +73,9 @@ export default function MediaPreview({ info }) {
             </span>
 
             <span style={{
-              background: 'rgba(226, 232, 240, 0.12)',
-              border: '1px solid rgba(226, 232, 240, 0.25)',
-              color: '#f8fafc',
+              background: 'rgba(56, 189, 248, 0.16)',
+              border: '1px solid rgba(56, 189, 248, 0.4)',
+              color: '#bae6fd', /* Light blue */
               padding: '4px 12px',
               borderRadius: '12px',
               fontSize: '0.8rem',

@@ -25,7 +25,7 @@ export default function DownloadHistory({ history, onDelete }) {
           <div
             key={item.id}
             style={{
-              background: 'rgba(30, 8, 40, 0.65)',
+              background: 'rgba(15, 23, 42, 0.7)',
               border: '1px solid rgba(226, 232, 240, 0.12)',
               borderRadius: '12px',
               padding: '14px 18px',
@@ -33,7 +33,8 @@ export default function DownloadHistory({ history, onDelete }) {
               alignItems: 'center',
               justifyContent: 'space-between',
               flexWrap: 'wrap',
-              gap: '12px'
+              gap: '12px',
+              transition: 'border-color 0.2s ease'
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: '220px', flex: 1 }}>
@@ -44,9 +45,9 @@ export default function DownloadHistory({ history, onDelete }) {
                 <div style={{ fontWeight: 600, color: '#f8fafc', fontSize: '0.95rem' }}>
                   {item.title}
                 </div>
-                <div style={{ fontSize: '0.78rem', color: '#94a3b8', marginTop: '2px' }}>
-                  <span style={{ color: '#fbbf24', fontWeight: 600 }}>{item.quality_tag}</span> &nbsp;|&nbsp;
-                  <span>{item.filesize_formatted}</span> &nbsp;|&nbsp;
+                <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '2px' }}>
+                  <span style={{ color: '#fbcfe8', fontWeight: 600 }}>{item.quality_tag}</span> &nbsp;|&nbsp;
+                  <span style={{ color: '#bae6fd' }}>{item.filesize_formatted}</span> &nbsp;|&nbsp;
                   <span>{item.ext.toUpperCase()}</span>
                 </div>
               </div>
@@ -58,9 +59,9 @@ export default function DownloadHistory({ history, onDelete }) {
                   href={getFileDownloadUrl(item.id)}
                   download={item.filename}
                   style={{
-                    background: 'rgba(245, 158, 11, 0.18)',
-                    border: '1px solid rgba(245, 158, 11, 0.45)',
-                    color: '#fbbf24',
+                    background: 'rgba(56, 189, 248, 0.16)',
+                    border: '1px solid rgba(56, 189, 248, 0.45)',
+                    color: '#7dd3fc',
                     textDecoration: 'none',
                     padding: '8px 16px',
                     borderRadius: '8px',
