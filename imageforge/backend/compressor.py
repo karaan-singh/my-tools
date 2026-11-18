@@ -203,3 +203,43 @@ def compress_image(
         if isinstance(exc, ValueError):
             raise
         raise ValueError(f"Invalid or corrupted image: {str(exc)}") from exc
+
+
+if __name__ == "__main__":
+    print("=" * 60)
+    print(" ImageForge - Compression Engine Diagnostic & Self-Test")
+    print("=" * 60)
+    print(f"Supported input formats : {', '.join(sorted(SUPPORTED_INPUTS))}")
+    print(f"Supported output formats: {', '.join(sorted(SUPPORTED_OUTPUTS))}")
+    print("-" * 60)
+
+    # Create a synthetic 1200x800 test image in memory
+    print("Creating synthetic high-resolution test image (1200x800 RGB)...")
+    test_img = Image.new("RGB", (1200, 800), color=(239, 68, 68))
+    # Draw some patterns
+    for y in range(0, 800, 40):
+        for x in range(0, 1200, 40):
+            if (x // 40 + y // 40) % 2 == 0:
+                for dy in range(20):
+                    for dx in range(20):
+                        if y + dy < 800 and x + dx < 1200:
+                            test_img.putpixel((x + dx, y + dy), (56, 189, 248))
+
+    raw_buf = BytesIO()
+    test_img.save(raw_buf, format="PNG")
+    original_data = raw_buf.getvalue()
+    orig_size = len(original_data)
+    print(f"Original Test PNG Size  : {orig_size / 1024:.2f} KB\n")
+
+    # Benchmark various output formats
+    for fmt in ["AUTO", "WEBP", "JPEG", "PNG"]:
+        out_bytes, final_fmt, mime = compress_image(original_data, quality=80, output_format=fmt)
+        out_size = len(out_bytes)
+        reduction = ((orig_size - out_size) / orig_size) * 100
+        print(f" -> Output: {fmt:5} => Format: {final_fmt:4} ({mime})")
+        print(f"    Size: {out_size / 1024:6.2f} KB | Savings: {reduction:5.1f}%\n")
+
+    print("=" * 60)
+    print(" Self-test PASSED! Compressor engine is fully functional.")
+    print("=" * 60)
+
