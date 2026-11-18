@@ -1,0 +1,95 @@
+:root {
+  --bg-deep-aubergine-dark: #0e0314;
+  --bg-deep-aubergine-mid: #1a0624;
+  --bg-deep-aubergine-light: #2d0b38;
+  --card-bg: rgba(42, 13, 56, 0.72);
+  --card-border: rgba(226, 232, 240, 0.16);
+  --card-border-hover: rgba(245, 158, 11, 0.45);
+  
+  --ice-silver-primary: #ffffff;
+  --ice-silver-light: #f8fafc;
+  --ice-silver-mid: #cbd5e1;
+  --ice-silver-muted: #94a3b8;
+
+  --marigold-glow: #fde68a;
+  --marigold-light: #fbbf24;
+  --marigold-primary: #f59e0b;
+  --marigold-dark: #d97706;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: radial-gradient(ellipse at 20% 15%, var(--bg-deep-aubergine-light) 0%, var(--bg-deep-aubergine-mid) 50%, var(--bg-deep-aubergine-dark) 100%);
+  min-height: 100vh;
+  color: var(--ice-silver-light);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Glassmorphism Card Utility */
+.glass-panel {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 12px 36px rgba(10, 2, 15, 0.5);
+  transition: all 0.25s ease;
+}
+
+.glass-panel:hover {
+  border-color: var(--card-border-hover);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #14041e;
+}
+::-webkit-scrollbar-thumb {
+  background: #3c124e;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--marigold-primary);
+}
+
+/* Animations */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(251, 191, 36, 0.55);
+  }
+}
+
+.glow-btn {
+  background: linear-gradient(135deg, var(--marigold-light) 0%, var(--marigold-primary) 50%, var(--marigold-dark) 100%);
+  color: #120317;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+}
+
+.glow-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(245, 158, 11, 0.6);
+  background: linear-gradient(135deg, var(--marigold-glow) 0%, var(--marigold-light) 50%, var(--marigold-primary) 100%);
+}
+
+.glow-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}

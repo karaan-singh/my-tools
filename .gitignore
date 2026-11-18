@@ -17,6 +17,12 @@ video-compressor/uploads/*
 video-compressor/compressed/*
 !video-compressor/compressed/.gitkeep
 
+# Universal Downloader temp data & node_modules
+universal-downloader/downloads/*
+!universal-downloader/downloads/.gitkeep
+universal-downloader/frontend/node_modules/
+universal-downloader/frontend/dist/
+
 # Operating System & IDEs
 .DS_Store
 Thumbs.db
