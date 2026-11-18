@@ -433,20 +433,21 @@ export default function App() {
           {!result.isBatch && result.preview && originalPreviews[0] && (
             <div style={{ marginTop: '20px', marginBottom: '24px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '10px' }}>
-                <span style={{ fontSize: '13px', fontWeight: 600, color: '#c4b5fd', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span style={{ fontSize: '13px', fontWeight: 700, color: '#dc2626', display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <Sparkles size={16} /> Visual Quality Comparison
                 </span>
                 <div style={{ display: 'flex', gap: '6px' }}>
                   <button
                     onClick={() => setCompareMode("side-by-side")}
                     style={{
-                      background: compareMode === "side-by-side" ? "#8b5cf6" : "#ffffff10",
-                      color: "white",
-                      border: "none",
-                      padding: "5px 12px",
-                      borderRadius: "6px",
-                      fontSize: "11px",
-                      fontWeight: 600
+                      background: compareMode === "side-by-side" ? "linear-gradient(135deg, #ef4444, #f87171)" : "#f1f5f9",
+                      color: compareMode === "side-by-side" ? "#ffffff" : "#475569",
+                      border: compareMode === "side-by-side" ? "none" : "1px solid #e2e8f0",
+                      padding: "6px 13px",
+                      borderRadius: "7px",
+                      fontSize: "11.5px",
+                      fontWeight: 600,
+                      boxShadow: compareMode === "side-by-side" ? "0 2px 6px rgba(239, 68, 68, 0.25)" : "none"
                     }}
                   >
                     Side-by-side
@@ -454,13 +455,14 @@ export default function App() {
                   <button
                     onClick={() => setCompareMode("slider")}
                     style={{
-                      background: compareMode === "slider" ? "#8b5cf6" : "#ffffff10",
-                      color: "white",
-                      border: "none",
-                      padding: "5px 12px",
-                      borderRadius: "6px",
-                      fontSize: "11px",
-                      fontWeight: 600
+                      background: compareMode === "slider" ? "linear-gradient(135deg, #0284c7, #38bdf8)" : "#f1f5f9",
+                      color: compareMode === "slider" ? "#ffffff" : "#475569",
+                      border: compareMode === "slider" ? "none" : "1px solid #e2e8f0",
+                      padding: "6px 13px",
+                      borderRadius: "7px",
+                      fontSize: "11.5px",
+                      fontWeight: 600,
+                      boxShadow: compareMode === "slider" ? "0 2px 6px rgba(2, 132, 199, 0.25)" : "none"
                     }}
                   >
                     Interactive Slider
@@ -471,16 +473,16 @@ export default function App() {
               {compareMode === "side-by-side" ? (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                   <div className="preview-box" style={{ flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-                    <small style={{ color: '#938da1' }}>Original ({formatSize(result.originalSize)})</small>
+                    <small style={{ color: '#64748b', fontWeight: 600 }}>Original ({formatSize(result.originalSize)})</small>
                     <img src={originalPreviews[0]} alt="Original" style={{ maxHeight: '280px' }} />
                   </div>
-                  <div className="preview-box" style={{ flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-                    <small style={{ color: '#4ade80', fontWeight: 700 }}>Optimized ({formatSize(result.compressedSize)}) — {result.outputFormat}</small>
+                  <div className="preview-box" style={{ flexDirection: 'column', alignItems: 'center', gap: '8px', borderColor: '#bae6fd' }}>
+                    <small style={{ color: '#0284c7', fontWeight: 700 }}>Optimized ({formatSize(result.compressedSize)}) — {result.outputFormat}</small>
                     <img src={result.preview} alt="Compressed result" style={{ maxHeight: '280px' }} />
                   </div>
                 </div>
               ) : (
-                <div style={{ position: 'relative', width: '100%', height: '360px', overflow: 'hidden', borderRadius: '12px', background: '#09090e', border: '1px solid #ffffff18' }}>
+                <div style={{ position: 'relative', width: '100%', height: '360px', overflow: 'hidden', borderRadius: '14px', background: '#f8fafc', border: '1px solid #e2e8f0' }}>
                   {/* Optimized image background */}
                   <img
                     src={result.preview}
@@ -495,7 +497,7 @@ export default function App() {
                     width: `${sliderPos}%`,
                     height: '100%',
                     overflow: 'hidden',
-                    borderRight: '2px solid #8b5cf6'
+                    borderRight: '3px solid #ef4444'
                   }}>
                     <img
                       src={originalPreviews[0]}
@@ -514,11 +516,11 @@ export default function App() {
                       position: 'absolute',
                       top: '12px',
                       left: '12px',
-                      background: 'rgba(0,0,0,0.7)',
+                      background: 'rgba(15, 23, 42, 0.78)',
                       color: '#ffffff',
                       fontSize: '11px',
-                      padding: '4px 8px',
-                      borderRadius: '4px',
+                      padding: '4px 9px',
+                      borderRadius: '5px',
                       fontWeight: 600
                     }}>
                       Original
@@ -529,11 +531,11 @@ export default function App() {
                     position: 'absolute',
                     top: '12px',
                     right: '12px',
-                    background: 'rgba(0,0,0,0.7)',
-                    color: '#4ade80',
+                    background: 'rgba(15, 23, 42, 0.78)',
+                    color: '#38bdf8',
                     fontSize: '11px',
-                    padding: '4px 8px',
-                    borderRadius: '4px',
+                    padding: '4px 9px',
+                    borderRadius: '5px',
                     fontWeight: 600
                   }}>
                     Optimized
@@ -552,7 +554,7 @@ export default function App() {
                       left: '10%',
                       width: '80%',
                       zIndex: 10,
-                      accentColor: '#8b5cf6'
+                      accentColor: '#ef4444'
                     }}
                   />
                 </div>
