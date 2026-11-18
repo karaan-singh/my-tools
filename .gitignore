@@ -23,6 +23,10 @@ universal-downloader/downloads/*
 universal-downloader/frontend/node_modules/
 universal-downloader/frontend/dist/
 
+# ImageForge temp data & node_modules
+imageforge/frontend/node_modules/
+imageforge/frontend/dist/
+
 # Operating System & IDEs
 .DS_Store
 Thumbs.db
