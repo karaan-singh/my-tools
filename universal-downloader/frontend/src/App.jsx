@@ -5,12 +5,17 @@ import MediaPreview from './components/MediaPreview';
 import FormatSelector from './components/FormatSelector';
 import DownloadProgress from './components/DownloadProgress';
 import DownloadHistory from './components/DownloadHistory';
-import { extractMedia, startDownload, getJobStatus, getHistory, deleteHistoryItem } from './services/api';
+import WebsiteScannerResults from './components/WebsiteScannerResults';
+import { extractMedia, scanWebsite, startDownload, getJobStatus, getHistory, deleteHistoryItem } from './services/api';
 
 export default function App() {
   const [url, setUrl] = useState('');
-  const [inspectLoading, setInspectLoading] = useState(false);
+  const [mode, setMode] = useState('inspect'); // 'inspect' or 'scan'
+  const [loading, setLoading] = useState(false);
+  const [loadingAction, setLoadingAction] = useState(''); // 'inspect' or 'scan'
+
   const [mediaInfo, setMediaInfo] = useState(null);
+  const [scanData, setScanData] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
 
   const [activeJob, setActiveJob] = useState(null);
@@ -31,21 +36,55 @@ export default function App() {
     }
   };
 
-  // Inspect video URL
-  const handleInspect = async () => {
-    if (!url.trim()) return;
+  // Inspect specific video URL
+  const handleInspect = async (overrideUrl) => {
+    const targetUrl = (overrideUrl || url).trim();
+    if (!targetUrl) return;
+
     setErrorMessage('');
-    setInspectLoading(true);
+    setLoading(true);
+    setLoadingAction('inspect');
     setMediaInfo(null);
 
     try {
-      const data = await extractMedia(url.trim());
+      const data = await extractMedia(targetUrl);
       setMediaInfo(data);
+      // Scroll to media preview smoothly
+      window.scrollTo({ top: 380, behavior: 'smooth' });
     } catch (err) {
       setErrorMessage(err.message || 'Failed to inspect URL.');
     } finally {
-      setInspectLoading(false);
+      setLoading(false);
+      setLoadingAction('');
     }
+  };
+
+  // Scan entire website for all videos
+  const handleScan = async () => {
+    if (!url.trim()) return;
+
+    setErrorMessage('');
+    setLoading(true);
+    setLoadingAction('scan');
+    setScanData(null);
+    setMediaInfo(null);
+
+    try {
+      const data = await scanWebsite(url.trim());
+      setScanData(data);
+    } catch (err) {
+      setErrorMessage(err.message || 'Failed to scan website for videos.');
+    } finally {
+      setLoading(false);
+      setLoadingAction('');
+    }
+  };
+
+  // User clicked "Download" on one of the discovered videos from the scanner
+  const handleSelectScannedVideo = (videoUrl) => {
+    setUrl(videoUrl);
+    setMode('inspect');
+    handleInspect(videoUrl);
   };
 
   // Start download job
@@ -100,8 +139,12 @@ export default function App() {
       <UrlInput
         url={url}
         setUrl={setUrl}
-        onInspect={handleInspect}
-        loading={inspectLoading}
+        onInspect={() => handleInspect()}
+        onScan={handleScan}
+        mode={mode}
+        setMode={setMode}
+        loading={loading}
+        loadingAction={loadingAction}
       />
 
       {/* Error Banner */}
@@ -128,7 +171,15 @@ export default function App() {
         <DownloadProgress job={activeJob} />
       )}
 
-      {/* Inspected Video Details */}
+      {/* Website Scanner Discovered Videos Grid */}
+      {scanData && (
+        <WebsiteScannerResults
+          scanData={scanData}
+          onSelectVideo={handleSelectScannedVideo}
+        />
+      )}
+
+      {/* Inspected Video Details & Format Selector */}
       {mediaInfo && (
         <>
           <MediaPreview info={mediaInfo} />
@@ -156,7 +207,7 @@ export default function App() {
         borderTop: '1px solid rgba(226, 232, 240, 0.1)',
         paddingTop: '24px'
       }}>
-        <p>⚡ Powered by <b>yt-dlp</b>, <b>FFmpeg</b>, <b>FastAPI</b> & <b>React</b>.</p>
+        <p>⚡ Powered by <b>yt-dlp</b>, <b>FFmpeg</b>, <b>FastAPI</b>, <b>BeautifulSoup</b> &amp; <b>React</b>.</p>
         <p style={{ marginTop: '4px' }}>
           Please only download media you own or have explicit authorization to download. Respect copyright and platform terms.
         </p>

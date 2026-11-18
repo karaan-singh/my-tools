@@ -17,6 +17,7 @@ if CURRENT_DIR not in sys.path:
 
 from security import validate_url, cleanup_old_files
 from extractor import extract_media_info
+from scanner import scan_website_for_videos
 from jobs import job_manager
 from downloader import start_download_task
 
@@ -63,6 +64,9 @@ app.add_middleware(
 class ExtractRequest(BaseModel):
     url: str = Field(..., description="The media or video page URL to inspect")
 
+class ScanRequest(BaseModel):
+    url: str = Field(..., description="Website URL to scan for all videos")
+
 class DownloadRequest(BaseModel):
     url: str
     title: str = "Video"
@@ -96,6 +100,19 @@ def extract_video_info(req: ExtractRequest):
         raise HTTPException(status_code=400, detail=str(ve))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Unexpected extraction error: {str(e)[:200]}")
+
+@app.post("/api/scan")
+def scan_website_endpoint(req: ScanRequest):
+    """
+    Scans a web page URL and detects all downloadable videos present on it.
+    """
+    try:
+        results = scan_website_for_videos(req.url)
+        return {"success": True, "data": results}
+    except ValueError as ve:
+        raise HTTPException(status_code=400, detail=str(ve))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to scan website: {str(e)[:200]}")
 
 @app.post("/api/download")
 def create_download_job(req: DownloadRequest):

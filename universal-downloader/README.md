@@ -2,12 +2,19 @@
 
 A modern, high-performance web application to inspect, stream, and download video and audio from popular media platforms with **FastAPI**, **React**, **yt-dlp**, and **FFmpeg**.
 
-Built with a bespoke luxury aesthetic featuring **Ice Silver**, **Deep Aubergine**, and **Marigold**.
+Designed in shades of **Light Pink** and **Light Blue** with glassmorphism styling.
 
 ---
 
 ## 🌟 Key Features
 
+- **🌐 Website URL Checker & Video Scanner**: Paste any webpage or article URL — the scanner analyzes the DOM to discover **all** downloadable videos on that page, including:
+  - HTML5 `<video>` tags and `<source>` media streams.
+  - Embedded player `<iframe>` tags (YouTube, Vimeo, Dailymotion, TikTok, Streamable, Loom, etc.).
+  - Direct video links (`.mp4`, `.webm`, `.mkv`, `.mov`).
+  - OpenGraph / Twitter meta video tags.
+  - JSON-LD structured `VideoObject` schema tags.
+  - Discovered videos are displayed in a responsive grid for 1-click inspection and downloading.
 - **Multi-Platform Support**: Powered by `yt-dlp` to extract media from YouTube, TikTok, X (Twitter), Vimeo, Reddit, SoundCloud, Instagram, Facebook, and direct media URLs.
 - **SSRF Attack Protection**: Built-in IP validation actively blocks localhost (`127.0.0.1`, `0.0.0.0`), private corporate network subnets (`10.0.0.0/8`, `192.168.0.0/16`, `172.16.0.0/12`), link-local metadata addresses (`169.254.169.254`), and non-HTTP protocols.
 - **Rich Media Preview**: Instant thumbnail preview, duration pill, channel/uploader name, platform badge, and video description.
@@ -28,6 +35,7 @@ universal-downloader/
 │
 ├── backend/
 │   ├── main.py            # FastAPI REST API & static file server
+│   ├── scanner.py         # Website URL checker & video sniffer (DOM, iframes, HTML5, OpenGraph)
 │   ├── extractor.py       # yt-dlp metadata & format extraction engine
 │   ├── downloader.py      # Background download execution & FFmpeg merging
 │   ├── security.py        # SSRF filter, DNS resolver check & filename sanitizer
@@ -36,12 +44,20 @@ universal-downloader/
 │
 ├── frontend/
 │   ├── src/
-│   │   ├── components/    # Header, UrlInput, MediaPreview, FormatSelector, etc.
-│   │   ├── services/      # Fetch API communication client
-│   │   ├── App.jsx        # Root state management & polling loop
-│   │   ├── index.css      # Deep Aubergine, Ice Silver & Marigold design tokens
+│   │   ├── components/
+│   │   │   ├── Header.jsx                # Light Pink & Light Blue luxury banner
+│   │   │   ├── UrlInput.jsx              # Mode switch: Single Video vs Website Scanner
+│   │   │   ├── WebsiteScannerResults.jsx # Discovered videos grid from scanned page
+│   │   │   ├── MediaPreview.jsx          # Thumbnail & video metadata
+│   │   │   ├── FormatSelector.jsx        # Quality selection (4K to 360p, MP3)
+│   │   │   ├── DownloadProgress.jsx      # Progress bar & ETA
+│   │   │   └── DownloadHistory.jsx       # Recent downloads
+│   │   ├── services/
+│   │   │   └── api.js                    # REST client (extract, scan, download, jobs)
+│   │   ├── App.jsx                       # Root state management & polling loop
+│   │   ├── index.css                     # Light Pink & Light Blue theme styles
 │   │   └── main.jsx
-│   ├── dist/              # Production optimized bundle
+│   ├── dist/                             # Production optimized bundle
 │   ├── package.json
 │   └── vite.config.js
 │
@@ -72,8 +88,3 @@ cd universal-downloader/frontend
 npm run dev
 ```
 Open **`http://localhost:5173`** for hot-module reloading.
-
----
-
-## 🛡️ Security & Terms Notice
-This tool is intended strictly for downloading content users own or have explicit authorization to download. It does not bypass DRM, paywalls, or private content restrictions.

@@ -13,6 +13,19 @@ export async function extractMedia(url) {
   return data.data;
 }
 
+export async function scanWebsite(url) {
+  const res = await fetch(`${API_BASE}/scan`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ url }),
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.detail || 'Failed to scan website.');
+  }
+  return data.data;
+}
+
 export async function startDownload(payload) {
   const res = await fetch(`${API_BASE}/download`, {
     method: 'POST',
