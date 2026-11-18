@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Video Compressor temp data (keep directory structure with .gitkeep)
+video-compressor/uploads/*
+!video-compressor/uploads/.gitkeep
+video-compressor/compressed/*
+!video-compressor/compressed/.gitkeep
+
+# Operating System & IDEs
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
