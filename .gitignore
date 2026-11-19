@@ -27,6 +27,11 @@ universal-downloader/frontend/dist/
 imageforge/frontend/node_modules/
 imageforge/frontend/dist/
 
+# ClarityForge temp data & node_modules
+clarityforge/frontend/node_modules/
+clarityforge/frontend/dist/
+clarityforge/backend/storage/
+
 # Operating System & IDEs
 .DS_Store
 Thumbs.db
