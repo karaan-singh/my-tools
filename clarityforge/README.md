@@ -17,6 +17,20 @@ Make blurry, dark, dull or low-resolution photos and videos **sharper, cleaner, 
 
 Presets: Smart Auto, Portrait, Vivid Landscape, Low Light, Old Photo Restore, Fix Blur, Upscale Only.
 
+## 📸 Pro Camera Look (iPhone / DSLR)
+
+Turns ordinary photos into images that look shot on a flagship phone or a full-frame DSLR by recreating a camera's image pipeline:
+
+| Look | What it does |
+| --- | --- |
+| **iPhone** | Smart HDR (single-image exposure fusion), Deep-Fusion style micro detail, clean auto white balance, bright natural tone curve, skin-safe color pop, ~12 MP output |
+| **iPhone Portrait** | iPhone look + portrait-mode background blur |
+| **DSLR** | Filmic S-curve with highlight roll-off, lens clarity, subtle split toning, vignette, fine film grain, ~24 MP output |
+| **DSLR Portrait (85mm f/1.8)** | Subject detection (GrabCut seeded at your tap-to-focus point) + optical lens blur with bokeh highlight bloom and halo-free edges |
+| **Night Mode** | Strong sensor-noise removal, shadow lifting, highlight protection |
+
+Sliders: Look Strength, Smart HDR, Detail, Color Pop, Background Blur, Warmth, Vignette, Film Grain · Resolution: Original / 12 MP / 24 MP.
+
 ## Project structure
 
 ```
@@ -24,6 +38,7 @@ clarityforge/
 ├── backend/
 │   ├── main.py             FastAPI routes (serves the built frontend too)
 │   ├── image_enhancer.py   OpenCV image pipeline + analysis
+│   ├── camera_look.py      iPhone / DSLR camera-look pipeline (HDR, bokeh, film character)
 │   ├── video_enhancer.py   FFmpeg video pipeline (background jobs)
 │   ├── jobs.py             Thread-safe job tracking & cleanup
 │   └── requirements.txt
@@ -56,6 +71,7 @@ Test the image engine on its own: `python backend/image_enhancer.py`
 | GET | `/api/health` | Engine status |
 | POST | `/api/analyze/image` | Analyze a photo and get recommended settings |
 | POST | `/api/enhance/image` | Enhance a photo (returns the image; stats in `X-*` headers) |
+| POST | `/api/camera/image` | Apply an iPhone / DSLR camera look |
 | POST | `/api/enhance/video` | Start a video job, returns `job_id` |
 | GET | `/api/jobs/{id}` | Job progress / ETA |
 | POST | `/api/jobs/{id}/cancel` | Cancel a running job |

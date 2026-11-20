@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Sparkles, Image as ImageIcon, Film, Maximize2, Focus, Palette, Eraser } from "lucide-react";
+import { Sparkles, Image as ImageIcon, Film, Maximize2, Focus, Palette, Eraser, Camera } from "lucide-react";
 import ImageStudio from "./components/ImageStudio";
 import VideoStudio from "./components/VideoStudio";
+import CameraStudio from "./components/CameraStudio";
 
 export default function App() {
   const [mode, setMode] = useState("image");
@@ -58,6 +59,7 @@ export default function App() {
           <Feature icon={<Focus size={16} />} label="Deblur & sharpen" />
           <Feature icon={<Palette size={16} />} label="Auto color fix" />
           <Feature icon={<Eraser size={16} />} label="Noise removal" />
+          <Feature icon={<Camera size={16} />} label="iPhone & DSLR looks" />
         </div>
       </section>
 
@@ -74,6 +76,16 @@ export default function App() {
         <button
           type="button"
           role="tab"
+          aria-selected={mode === "camera"}
+          className={mode === "camera" ? "active" : ""}
+          onClick={() => setMode("camera")}
+        >
+          <Camera size={17} /> Pro Camera Look
+          <span className="tab-new">NEW</span>
+        </button>
+        <button
+          type="button"
+          role="tab"
           aria-selected={mode === "video"}
           className={mode === "video" ? "active" : ""}
           onClick={() => setMode("video")}
@@ -82,9 +94,12 @@ export default function App() {
         </button>
       </div>
 
-      {/* Keep both mounted so switching tabs doesn't lose work in progress */}
+      {/* Keep all studios mounted so switching tabs doesn't lose work in progress */}
       <div hidden={mode !== "image"}>
         <ImageStudio />
+      </div>
+      <div hidden={mode !== "camera"}>
+        <CameraStudio />
       </div>
       <div hidden={mode !== "video"}>
         <VideoStudio />

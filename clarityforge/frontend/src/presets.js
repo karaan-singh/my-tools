@@ -63,6 +63,67 @@ export const SLIDERS = [
 export const IMAGE_SCALES = [1, 2, 4];
 export const VIDEO_SCALES = [1, 1.5, 2];
 
+// Pro Camera looks (hidden tone/color science lives in backend/camera_look.py)
+export const CAMERA_LOOKS = [
+  {
+    id: "iphone",
+    name: "iPhone",
+    badge: "Smart HDR",
+    emoji: "📱",
+    description: "Bright, clean and crisp — Smart HDR + Deep Fusion detail",
+    settings: { intensity: 80, hdr: 60, detail: 55, color: 32, bokeh: 0, warmth: 4, vignette: 0, grain: 0, resolution: "12" },
+  },
+  {
+    id: "iphone_portrait",
+    name: "iPhone Portrait",
+    badge: "Portrait mode",
+    emoji: "🤳",
+    description: "iPhone look with natural background blur",
+    settings: { intensity: 80, hdr: 55, detail: 45, color: 28, bokeh: 60, warmth: 6, vignette: 10, grain: 0, resolution: "12" },
+  },
+  {
+    id: "dslr",
+    name: "DSLR",
+    badge: "Full-frame",
+    emoji: "📷",
+    description: "Rich filmic tones, lens character, 24 MP detail",
+    settings: { intensity: 80, hdr: 35, detail: 50, color: 24, bokeh: 0, warmth: 6, vignette: 20, grain: 10, resolution: "24" },
+  },
+  {
+    id: "dslr_portrait",
+    name: "DSLR Portrait",
+    badge: "85mm f/1.8",
+    emoji: "🎞️",
+    description: "Creamy bokeh, subject pops off the background",
+    settings: { intensity: 80, hdr: 30, detail: 42, color: 20, bokeh: 85, warmth: 8, vignette: 24, grain: 8, resolution: "24" },
+  },
+  {
+    id: "night",
+    name: "Night Mode",
+    badge: "Low light",
+    emoji: "🌃",
+    description: "Brighter, cleaner low-light shots without grain",
+    settings: { intensity: 80, hdr: 80, detail: 35, color: 25, bokeh: 0, warmth: -4, vignette: 8, grain: 0, resolution: "12" },
+  },
+];
+
+export const CAMERA_SLIDERS = [
+  { key: "intensity", label: "Look Strength", hint: "Overall intensity of the camera look", min: 0, max: 100 },
+  { key: "hdr", label: "Smart HDR", hint: "Opens up shadows and holds bright skies", min: 0, max: 100 },
+  { key: "detail", label: "Detail (Deep Fusion)", hint: "Fine texture in hair, fabric and foliage", min: 0, max: 100 },
+  { key: "color", label: "Color Pop", hint: "Richer colors with skin-tone protection", min: 0, max: 100 },
+  { key: "bokeh", label: "Background Blur", hint: "Portrait-mode lens blur around the focus point", min: 0, max: 100 },
+  { key: "warmth", label: "Warmth", hint: "Cooler ← white balance → warmer", min: -50, max: 50 },
+  { key: "vignette", label: "Lens Vignette", hint: "Darkens corners to draw the eye in", min: 0, max: 100 },
+  { key: "grain", label: "Film Grain", hint: "Fine organic texture of a big sensor", min: 0, max: 100 },
+];
+
+export const CAMERA_RESOLUTIONS = [
+  { id: "original", label: "Original" },
+  { id: "12", label: "12 MP" },
+  { id: "24", label: "24 MP" },
+];
+
 export function formatSize(bytes) {
   if (!bytes && bytes !== 0) return "—";
   if (bytes >= 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(2) + " MB";

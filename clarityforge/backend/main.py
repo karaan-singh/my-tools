@@ -27,6 +27,7 @@ if CURRENT_DIR not in sys.path:
     sys.path.insert(0, CURRENT_DIR)
 
 from image_enhancer import EnhanceSettings, analyze_image, enhance_image, OUTPUT_FORMATS  # noqa: E402
+from camera_look import CameraSettings, camera_enhance  # noqa: E402
 from jobs import job_manager  # noqa: E402
 from video_enhancer import FFMPEG, run_video_job  # noqa: E402
 
@@ -142,8 +143,12 @@ async def enhance(
     except MemoryError:
         raise HTTPException(413, "Not enough memory - try a smaller upscale factor.")
 
+    return image_response(result, data, file.filename, "enhanced", started)
+
+
+def image_response(result: dict, original: bytes, name: str, suffix: str, started: float) -> Response:
     ext = "jpg" if result["format"] == "JPEG" else result["format"].lower()
-    filename = f"{safe_stem(file.filename)}_enhanced.{ext}"
+    filename = f"{safe_stem(name)}_{suffix}.{ext}"
     headers = {
         "Content-Disposition": f"inline; filename*=UTF-8''{quote(filename)}",
         "X-Filename": quote(filename),
@@ -152,12 +157,43 @@ async def enhance(
         "X-Output-Width": str(result["width"]),
         "X-Output-Height": str(result["height"]),
         "X-Scale": str(result["scale"]),
-        "X-Original-Size": str(len(data)),
+        "X-Original-Size": str(len(original)),
         "X-Output-Size": str(len(result["data"])),
         "X-Output-Format": result["format"],
         "X-Process-Time": f"{time.time() - started:.2f}",
     }
+    if result.get("subject_coverage") is not None:
+        headers["X-Subject-Coverage"] = str(result["subject_coverage"])
     return Response(content=result["data"], media_type=result["mime"], headers=headers)
+
+
+@app.post("/api/camera/image")
+async def camera_look(
+    file: UploadFile = File(...),
+    settings: str = Form("{}"),
+    output_format: str = Form("JPEG"),
+):
+    """Pro Camera Look: iPhone / DSLR style processing."""
+    data = await read_image_upload(file)
+    fmt = output_format.upper().replace("JPG", "JPEG")
+    if fmt not in OUTPUT_FORMATS:
+        raise HTTPException(400, "Output format must be PNG, JPEG or WEBP.")
+    try:
+        raw = json.loads(settings) if settings else {}
+        if not isinstance(raw, dict):
+            raise ValueError
+    except ValueError:
+        raise HTTPException(400, "Invalid settings JSON.")
+    opts = CameraSettings.from_dict(raw)
+
+    started = time.time()
+    try:
+        result = await run_in_threadpool(camera_enhance, data, opts, fmt, 95)
+    except ValueError as exc:
+        raise HTTPException(400, str(exc))
+    except MemoryError:
+        raise HTTPException(413, "Not enough memory - try a lower resolution.")
+    return image_response(result, data, file.filename, opts.look, started)
 
 
 @app.post("/api/enhance/video")
